@@ -12,7 +12,11 @@ def DoStuff():
     testdataLocalChangesDontCommit = np.array([1,2,3])
     testdataLocalChangesDontCommit
 
+<<<<<<< HEAD
 anotherChangeIForgotv222=100
 anotherChangeIForgotv223=100
+=======
+anotherChangeIForgot=100
+>>>>>>> c9a633ad8fc5640bbd3181bc068715eeea0345fb
 testdata33 = 33
 testdata33
