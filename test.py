@@ -12,6 +12,6 @@ def DoStuff():
     testdataLocalChangesDontCommit = np.array([1,2,3])
     testdataLocalChangesDontCommit
 
-
+anotherChangeIForgot=100
 testdata33 = 33
 testdata33
