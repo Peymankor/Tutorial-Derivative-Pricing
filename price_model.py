@@ -4,6 +4,7 @@ import numpy as np
 import math
 import rich
 from rich import print, pretty
+import matplotlib.pyplot as plt
 pretty.install()
 
 # GMB Model
@@ -44,8 +45,6 @@ steps=steps_value)
 ########## Plot the Data ################
 
 Time_steps = np.arange(1, steps_value+1)
-
-import matplotlib.pyplot as plt
 
 plt.plot(Time_steps, Test_GBM.T)
 plt.show()
