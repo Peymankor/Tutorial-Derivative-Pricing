@@ -46,6 +46,7 @@ steps=steps_value)
 
 Time_steps = np.arange(1, steps_value+1)
 
-plt.plot(Time_steps, Test_GBM.T)
-plt.show()
+#plt.plot(Time_steps, Test_GBM.T)
+#plt.show()
 
+######################################################################
