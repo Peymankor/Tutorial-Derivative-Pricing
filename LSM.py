@@ -68,7 +68,7 @@ def priceOption(S0, K, r, paths, sd, T, steps, Stock_Matrix,k, reduce_variance =
 S0_value = 36
 r_value = 0.06
 sd_value = 0.2
-T_value = 2
+T_value = 1
 paths_value = 100000
 steps_value = 50
 
@@ -106,7 +106,7 @@ def european_put_price(S0, K, r, sd, T) -> float:
 
 #########################################################
 
-S0_values_table1 = np.arange(36,44, 2)
+S0_values_table1 = np.arange(36,46, 2)
 sd_values_table1 = np.array([0.2, 0.4])
 T_values_table1 = np.array([1, 2])
 
@@ -114,7 +114,7 @@ T_values_table1 = np.array([1, 2])
 
 def Table1_func(S0_values,sd_values,T_values):
   print("%-10s %-10s %-10s %-20s %-20s %-20s" 
-        %("S0","vol", "T", "Closed Form European", "Simulated American", "Early exercise value"))
+        %("S0","vol", "T", "Closed Form European", "Simulated American", "Early exercise"))
 
   for S0_table1 in S0_values:
     for sd_table1 in sd_values:
