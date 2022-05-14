@@ -194,4 +194,4 @@ discountFactor = np.tile(np.exp(-r*dt* np.arange(1,
 discountFactor
 
 
-np.exp(-rate * t)
+#np.exp(-rate * t)
