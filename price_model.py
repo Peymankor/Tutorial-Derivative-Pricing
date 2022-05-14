@@ -28,7 +28,7 @@ def SimulateGBM(S0, r, sd, T, paths, steps, reduce_variance = True):
         St[:, i] = St[:, i - 1]*np.exp((r - 1/2*np.power(sd, 2))*dt + sd*dWt[:, i-1])
     
     return St[:,1:]
-
+    #return St
 
 ######## Test ##############################
 S0_value = 36
