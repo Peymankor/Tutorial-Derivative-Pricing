@@ -103,7 +103,7 @@ def laguerre_polynomials_ind(S, k):
     
     return X[k-2]
 
-
+# better regression equation of the 
 
 def option_price_lsm(
         scoring_data: np.ndarray,
