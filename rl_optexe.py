@@ -7,6 +7,8 @@ from function_approx import \
 from random import randrange
 from numpy.polynomial.laguerre import lagval
 
+from rich import print, pretty
+pretty.install()
 
 TrainingDataType = Tuple[int, float, float]
 
@@ -51,6 +53,8 @@ class OptimalExerciseRL:
                 m: float = np.log(price) + (self.rate - vol2 / 2) * dt
                 v: float = vol2 * dt
                 next_price: float = np.exp(np.random.normal(m, np.sqrt(v)))
+
+                # (time (t),p_t, p_{t+1})
                 ret.append((step, price, next_price))
                 price = next_price
         return ret
@@ -319,6 +323,19 @@ def fitted_lspi_put_option(
         split=split
     )
 
+############ Undesrtanding Codes ########################################
+
+def payoff_func(_: float, s: float) -> float:
+        return max(strike - s, 0.)
+
+Test_Class_price = OptimalExerciseRL(spot_price=10, payoff=payoff_func, 
+expiry=1, rate=0.06, vol=0.2, num_steps=10)
+
+Test_Class_price.training_sim_data(num_paths=5,spot_price_frac=0)
+
+
+Test_Class_price.scoring_sim_data(num_paths=3)
+
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
@@ -331,11 +348,11 @@ if __name__ == '__main__':
 
     dt: float = expiry_val / num_steps_val
 
-    num_training_paths: int = 10000
+    num_training_paths: int = 5000
     spot_price_frac_val: float = 0.0
 
-    dql_training_iters: int = 200000
-    lspi_training_iters: int = 10
+    dql_training_iters: int = 1000000
+    lspi_training_iters: int = 8
 
     split_val: int = 1000
 
