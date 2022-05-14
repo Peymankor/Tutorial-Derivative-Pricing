@@ -133,10 +133,13 @@ def option_price_lsm(
 
                 #continue_price: float = func.evaluate([(t, path[step])])[0] \
                 #    if step < self.num_steps else 0.
-                step += 1
-                if exercise_price >= continue_price:
-                    prices[i] = np.exp(-rate * t) * exercise_price
-                    step = num_steps + 1
+                    step += 1
+                    if exercise_price >= continue_price:
+                        prices[i] = np.exp(-rate * t) * exercise_price
+                        step = num_steps + 1
+                else:
+                    step += 1
+
 
         return np.average(prices)
 
