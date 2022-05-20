@@ -134,35 +134,37 @@ class OptimalExerciseLSM:
 ################################ TEST Code ###################################
 
 
-S0_value = 36
-r_value = 0.06
-sd_value = 0.2
-T_value = 1
-paths_value = 1000000
-steps_value = 50
+if __name__ == "__main__":
 
-K_value = 40
-k_value = 4
+    S0_value = 36
+    r_value = 0.06
+    sd_value = 0.2
+    T_value = 1
+    paths_value = 100000
+    steps_value = 50
 
-strike = 40
+    K_value = 40
+    k_value = 4
 
-def payoff_func(_: float, s: float) -> float:
-        return max(strike - s, 0.)
+    strike = 40
 
-Testclass = OptimalExerciseLSM(spot_price=S0_value, payoff=payoff_func,expiry=T_value,
+    def payoff_func(_: float, s: float) -> float:
+            return max(strike - s, 0.)
+
+    Testclass = OptimalExerciseLSM(spot_price=S0_value, payoff=payoff_func,expiry=T_value,
                                         rate=r_value, vol=sd_value,num_steps=steps_value)
 
-train_data_v = Testclass.GBMprice_training(num_paths_train=paths_value)
+    train_data_v = Testclass.GBMprice_training(num_paths_train=paths_value)
 
-lsm_policy_v = Testclass.train_LSM(training_data=train_data_v, num_paths_train=paths_value,
+    lsm_policy_v = Testclass.train_LSM(training_data=train_data_v, num_paths_train=paths_value,
                                             K=K_value, k=k_value)
 
-test_data_v = Testclass.scoring_sim_data(num_paths_test=10000)
+    test_data_v = Testclass.scoring_sim_data(num_paths_test=10000)
 
-Option_price = Testclass.option_price(scoring_data=test_data_v,Beta_list=lsm_policy_v,
+    Option_price = Testclass.option_price(scoring_data=test_data_v,Beta_list=lsm_policy_v,
                                             k=k_value)
-print("Test Code: \nOption Price:")
-print(Option_price)
+    print("Test Code: \nOption Price:")
+    print(Option_price)
 
 
 
@@ -171,40 +173,40 @@ print(Option_price)
 ########################################################################################
 ########################################################################################
 
-S0_values_table1 = np.arange(36,46, 2)
-sd_values_table1 = np.array([0.2, 0.4])
-T_values_table1 = np.array([1, 2])
+    S0_values_table1 = np.arange(36,46, 2)
+    sd_values_table1 = np.array([0.2, 0.4])
+    T_values_table1 = np.array([1, 2])
 
 
 
-def Table1_func(S0_values,sd_values,T_values, paths_number_train, paths_number_test):
-  print("%-10s %-10s %-10s %-20s %-20s %-20s" 
-        %("S0","vol", "T", "Closed Form European", "Simulated American", "Early exercise"))
+    def Table1_func(S0_values,sd_values,T_values, paths_number_train, paths_number_test):
+        print("%-10s %-10s %-10s %-20s %-20s %-20s" 
+            %("S0","vol", "T", "Closed Form European", "Simulated American", "Early exercise"))
 
-  for S0_table1 in S0_values:
-    for sd_table1 in sd_values:
-      for T_table1 in T_values:
+        for S0_table1 in S0_values:
+            for sd_table1 in sd_values:
+                for T_table1 in T_values:
 
-        LSMclass = OptimalExerciseLSM(spot_price=S0_table1, payoff=payoff_func,
-        expiry=T_table1, rate=r_value, vol=sd_table1,num_steps=steps_value)
+                    LSMclass = OptimalExerciseLSM(spot_price=S0_table1, payoff=payoff_func,
+                        expiry=T_table1, rate=r_value, vol=sd_table1,num_steps=steps_value)
 
-        euoption = LSMclass.european_put_price(strike=40)
+                    euoption = LSMclass.european_put_price(strike=40)
 
-        train_data_v = LSMclass.GBMprice_training(num_paths_train=paths_number_train)
+                    train_data_v = LSMclass.GBMprice_training(num_paths_train=paths_number_train)
 
-        lsm_policy_v = LSMclass.train_LSM(training_data=train_data_v, 
+                    lsm_policy_v = LSMclass.train_LSM(training_data=train_data_v, 
                             num_paths_train=paths_number_train, K=K_value, k=k_value)
 
-        test_data_v = LSMclass.scoring_sim_data(num_paths_test=paths_number_test)
+                    test_data_v = LSMclass.scoring_sim_data(num_paths_test=paths_number_test)
 
-        Option_price = LSMclass.option_price(scoring_data=test_data_v, 
-                    Beta_list=lsm_policy_v,k=k_value)
+                    Option_price = LSMclass.option_price(scoring_data=test_data_v, 
+                        Beta_list=lsm_policy_v,k=k_value)
       
-        print("%d %10.2f %10d %20.3f %20.3f %20.3f" 
-              %(S0_table1,sd_table1, T_table1, euoption, 
-                    Option_price,Option_price-euoption))
+                    print("%d %10.2f %10d %20.3f %20.3f %20.3f" 
+                        %(S0_table1,sd_table1, T_table1, euoption, 
+                            Option_price,Option_price-euoption))
 
 
-Table1_func(S0_values=S0_values_table1, sd_values=sd_values_table1, 
+    Table1_func(S0_values=S0_values_table1, sd_values=sd_values_table1, 
                     T_values=T_values_table1, paths_number_train=100000, 
                     paths_number_test=1000)
