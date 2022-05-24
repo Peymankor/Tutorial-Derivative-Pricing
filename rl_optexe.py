@@ -6,6 +6,7 @@ from function_approx import \
     DNNApprox, LinearFunctionApprox, FunctionApprox, DNNSpec, AdamGradient
 from random import randrange
 from numpy.polynomial.laguerre import lagval
+from pprint import pprint
 
 from rich import print, pretty
 pretty.install()
@@ -120,8 +121,8 @@ class OptimalExerciseRL:
                 val = max(val, fa.evaluate([(t + dt, s1)])[0])
             y_val: float = gamma * val
             fa = fa.update([(x_val, y_val)])
-            # for w in fa.weights:
-            #     pprint(w.weights)
+            for w in fa.weights:
+                 pprint(w.weights)
         return fa
 
     def train_lspi(
@@ -265,10 +266,10 @@ def fitted_dql_put_option(
         bias=True,
         hidden_activation=lambda x: np.log(1 + np.exp(-x)),
         hidden_activation_deriv=lambda y: np.exp(-y) - 1,
-        # hidden_activation=lambda x: np.vectorize(
+        #hidden_activation=lambda x: np.vectorize(
         #     lambda y: y if y > 0. else 0.
         # )(x),
-        # hidden_activation_deriv=lambda x: np.vectorize(
+        #hidden_activation_deriv=lambda x: np.vectorize(
         #     lambda y: 1. if y > 0. else 0.
         # )(x),
         output_activation=lambda x: x,
