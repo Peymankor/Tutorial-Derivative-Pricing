@@ -88,7 +88,7 @@ TrainingDataType = Tuple[int, float, float]
 
 num_scoring_paths = 5000
 
-num_training_paths = 5000
+num_training_paths = 10000
 spot_price_frac_val = 0
 dql_training_iters = 1000000
 
