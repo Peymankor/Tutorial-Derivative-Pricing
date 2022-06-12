@@ -1,10 +1,14 @@
 
 # packages, rich is terminal output formatting
+from cProfile import label
 import numpy as np
 import math
 import rich
 from rich import print, pretty
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+import matplotlib.dates as mdates
+
 pretty.install()
 
 # GMB Model
@@ -29,25 +33,6 @@ def SimulateGBM(S0, r, sd, T, paths, steps, reduce_variance = True):
     
     return St[:,1:]
     #return St
-
-######## Test ##############################
-S0_value = 36
-r_value = 0.06
-sd_value = 0.2
-T_value = 1
-paths_value = 100
-steps_value = 50
-
-Test_GBM = SimulateGBM(S0=S0_value, r=r_value, sd=sd_value, T=T_value, paths=paths_value,
-steps=steps_value)
-
-
-########## Plot the Data ################
-
-Time_steps = np.arange(1, steps_value+1)
-
-#plt.plot(Time_steps, Test_GBM.T)
-#plt.show()
 
 ######################################################################
 
@@ -177,3 +162,84 @@ class Brent_GARCH:
                 S[path, t] = S[path,t-1]*(1+(r/100))
 
         return S[:,1:]
+
+
+###################### TEST ##################
+
+if __name__ == "__main__":
+
+  S0_value = 36
+  r_value = 0.06
+  sd_value = 0.2
+  T_value = 1
+  paths_value = 100
+  steps_value = 50
+
+  Test_GBM = SimulateGBM(S0=S0_value, r=r_value, sd=sd_value, T=T_value, paths=paths_value,
+        steps=steps_value)
+
+
+########## Plot the Data ################
+
+  Time_steps = np.arange(1, steps_value+1)
+  plt.plot(Time_steps, Test_GBM.T)
+  plt.show()
+  plt.close()
+
+###########################################
+  Brent_crude_df = pd.read_excel("https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls", 
+                        sheet_name="Data 1")
+
+#################################################
+
+# Plot realized volatility and mdel
+
+  class_brent = Brent_GARCH(brent_df=Brent_crude_df)
+  clean_data, _ = class_brent.data_process()
+  garch_prices= class_brent.generate_paths(num_time_steps=50, 
+                num_path_numbers=100, initial_price=115.3)
+
+
+  realized_val, conditional_val = class_brent.compare_model()
+
+  fig, ax = plt.subplots()
+
+  ax.plot(clean_data["Date"][1:] ,realized_val, label="Realized Volatility")
+  ax.plot(clean_data["Date"][1:], conditional_val, 
+                label = "Conditional Volatility, GARCH Model")
+  ax.legend(loc="upper left")
+  ax.yaxis.set_major_formatter(mtick.PercentFormatter())
+  ax.xaxis.set_major_locator(mdates.MonthLocator(interval=9))
+  ax.tick_params(axis='x', labelrotation=90)
+  ax.set_ylabel(r'Volatility [$\sigma_t$]')
+  print("Plot Realized Volatility  an Conditional through GARCH model")
+  plt.show()
+
+  
+# Make New Realziations  100, with 
+
+  forward_days = 100
+  path_numbers_val = 100
+  initial_price_val = clean_data["Dollar"].iloc[-1]
+  initial_time_value = clean_data["Date"].iloc[-1]
+
+
+  garch_prices= class_brent.generate_paths(num_time_steps=forward_days, 
+                num_path_numbers=path_numbers_val, 
+                initial_price=initial_price_val)
+
+  future_data=pd.bdate_range(start=initial_time_value, periods=99)
+
+  last_time_value = future_data[-1]
+  fig, ax = plt.subplots()
+
+  ax.plot(future_data, garch_prices.T)
+  ax.xaxis.set_major_locator(mdates.DayLocator(interval=3))
+  ax.set_xlim([initial_time_value, last_time_value])
+  ax.tick_params(axis='x', labelrotation=90)
+  ax.set_ylabel(r'Price [\$]')
+  
+  print("Plot 100 new paths from GARCH model")
+  
+  plt.show()
+  
