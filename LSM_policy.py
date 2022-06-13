@@ -74,7 +74,7 @@ class OptimalExerciseLSM:
           Beta = np.dot(np.linalg.pinv(A), b)
 
           cont_value[in_the_money_n,i] =  np.dot(X, Beta)
-
+    # Yasaman, lokk at below three codes, these are one under discussion :)
           try:
               cont_value[out_of_money_n,i] =  cont_value[out_of_money_n, i + 1]/np.exp(self.rate*dt)
           except:
