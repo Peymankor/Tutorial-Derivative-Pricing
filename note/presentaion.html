@@ -377,6 +377,28 @@ n = 50         \; \; \;  \; \; \;   \textrm{number of time steps} \\
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
+<ul>
+<li>The experiences data set <span class="math inline">\(\mathcal{D}\)</span></li>
+</ul>
+<p><span class="math display">\[
+\hat{Q}(s,a; \mathbf{w}) =
+\begin{cases}
+\mathbf{\phi}(s)^T \cdot \mathbf{w} &amp; \text{ if } a = c \\
+g(s) &amp; \text{ if } a = e
+\end{cases}
+\text{ for all } s \in \mathcal{N}
+\]</span></p>
+<p><span class="math display">\[
+\phi(.) = [\phi(.)|i=1,...,m]
+\]</span></p>
+<p><span class="math display">\[\begin{align*}
+\mathcal{L}(\mathbf{w}) &amp; = \sum_{i=1}^n (Q(s_i; \mathbf{w}) - (r_i + \gamma \cdot Q(s'_i,\pi_D(s'_i); \mathbf{w})))^2\\
+&amp; = \sum_{i=1}^n (\mathbf{\phi}(s_i)^T \cdot \mathbf{w} - (r_i + \gamma \cdot \mathbf{\phi}(s'_i, \pi_D(s'_i))^T \cdot \mathbf{w}))^2
+\end{align*}\]</span></p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[\pi'_D(s) = \underset{a}{\arg\max} \; \hat{Q}(s,a; \mathbf{w}^*) \text{ for all } s \in \mathcal{N}\]</span></p>
 <div class="footer footer-default">
 
 </div>

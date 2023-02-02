@@ -63,3 +63,26 @@ $$
 \end{align}
 
 ##
+- The experiences data set $\mathcal{D}$
+
+$$
+\hat{Q}(s,a; \mathbf{w}) =
+\begin{cases}
+\mathbf{\phi}(s)^T \cdot \mathbf{w} & \text{ if } a = c \\
+g(s) & \text{ if } a = e
+\end{cases}
+\text{ for all } s \in \mathcal{N}
+$$
+
+$$
+\phi(.) = [\phi(.)|i=1,...,m]
+$$
+
+
+\begin{align*}
+\mathcal{L}(\mathbf{w}) & = \sum_{i=1}^n (Q(s_i; \mathbf{w}) - (r_i + \gamma \cdot Q(s'_i,\pi_D(s'_i); \mathbf{w})))^2\\
+& = \sum_{i=1}^n (\mathbf{\phi}(s_i)^T \cdot \mathbf{w} - (r_i + \gamma \cdot \mathbf{\phi}(s'_i, \pi_D(s'_i))^T \cdot \mathbf{w}))^2
+\end{align*}
+
+##
+$$\pi'_D(s) = \underset{a}{\arg\max} \; \hat{Q}(s,a; \mathbf{w}^*) \text{ for all } s \in \mathcal{N}$$
