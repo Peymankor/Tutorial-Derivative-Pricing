@@ -255,13 +255,13 @@ if __name__ == '__main__':
     expiry_val: float = 1.0
     rate_val: float = 0.06
     vol_val: float = 0.2
-    num_scoring_paths: int = 10000
+    num_scoring_paths: int = 10
     num_steps_scoring: int = 50
 
-    num_steps_lspi: int = 10
-    num_training_paths_lspi: int = 10000
+    num_steps_lspi: int = 5
+    num_training_paths_lspi: int = 5
     spot_price_frac_lspi: float = 0.1
-    training_iters_lspi: int = 50
+    training_iters_lspi: int = 3
 
 
 
