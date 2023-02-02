@@ -1,0 +1,30 @@
+---
+title: My title
+author: 
+  - name: Author Name
+    url: <orcid or linkedin profile>
+citation: true
+date: 20-Sep-2022
+abstract: This article ...  ...
+#bibliography: biblio.bib
+license: "CC BY"
+format:
+  elsevier-pdf:
+    echo: false
+    fig-format: png
+    journal:
+      formatting: preprint
+      layout: onecolumn
+      cite-style: authoryear
+  html:
+    toc: true
+    code-fold: true
+editor:
+  render-on-save: true
+---
+
+# 
+# mndsas
+
+$$x = 1dsa$$
+$$\phi = 1$$

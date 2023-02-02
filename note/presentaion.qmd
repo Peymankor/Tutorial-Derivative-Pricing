@@ -1,0 +1,65 @@
+---
+title: "Habits"
+author: "John Doe"
+format: revealjs
+editor:
+  render-on-save: true
+
+---
+
+## Binomial Option Pricing
+
+
+$$
+dS_t= r.S_t.dt + \sigma.S_t.dz_t
+$$
+
+$$
+\log^2(u) = \frac{\sigma^2T}{n} \Rightarrow u=e^{\sigma\sqrt{\frac{T}{n}}}
+$$
+
+$$
+qu + \frac{1-q}{u} = e^{\frac{rT}{n}} \Rightarrow q = \frac{e^{\frac{rT}{n}+\sigma\sqrt{\frac{T}{n}}}-1}{e^{2\sigma\sqrt{\frac{T}{n}}}}
+$$
+## Price in state $j$ at time step $i$
+
+$$
+S_{i,j} = S_{0,0}.e^{(2j-i)\sigma\sqrt{\frac{T}{n}}}
+$$
+
+## Maximization
+
+$$
+- max(K-Su^3, 0)
+$$
+
+$$
+max(K-Su^2d, 0)
+$$
+
+$$
+fv= exp(-self.rate * dt) * (q * C[(k+1, m+1)] + (1-q) * C[(k+1, m)])
+$$
+
+
+## New slide
+$$
+S = 36.0       \; \; \;  \; \; \;   \textrm{Spot price value} \\
+K = 40.0       \; \; \;  \; \; \;   \textrm{Strike value} \\
+\sigma = 0.2   \; \; \;  \; \; \;   \textrm{volatility} \\
+r = 0.06       \; \; \;  \; \; \;   \textrm{risk free interest rate} \\
+T = 1          \; \; \;  \; \; \;   \textrm{expiry date in year}\\
+n = 50         \; \; \;  \; \; \;   \textrm{number of time steps} \\
+$$
+
+## Test
+\begin{align}
+&S = 36.0       \quad \quad   \textrm{Spot price value}&     \\
+&K = 40.0       \quad \quad   \textrm{Strike value}&\\
+&\sigma = 0.2   \quad \quad   \textrm{volatility}& \\
+&r = 0.06       \quad \quad   \textrm{risk free interest rate}& \\
+&T = 1          \quad \quad   \textrm{expiry date in year}&\\
+&n = 50         \quad \quad   \textrm{number of time steps}& \\
+\end{align}
+
+##
