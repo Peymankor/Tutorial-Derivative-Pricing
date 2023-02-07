@@ -1,0 +1,23 @@
+---
+title: "Habitse"
+author: "John Doe"
+format: revealjs
+editor:
+  render-on-save: true
+
+---
+
+## Binomial Option Pricing
+
+
+$$
+dS_t= r.S_t.dt + \sigma.S_t.dz_t
+$$
+
+$$
+\log^2(u) = \frac{\sigma^2T}{n} \Rightarrow u=e^{\sigma\sqrt{\frac{T}{n}}}
+$$
+
+$$
+qu + \frac{1-q}{u} = e^{\frac{rT}{n}} \Rightarrow q = \frac{e^{\frac{rT}{n}+\sigma\sqrt{\frac{T}{n}}}-1}{e^{2\sigma\sqrt{\frac{T}{n}}}}
+$$
