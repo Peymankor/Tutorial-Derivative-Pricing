@@ -16,7 +16,7 @@ pretty.install()
 
 import matplotlib.pyplot as plt
 
-from lsmfresh import lsm_policy, option_price_lsm
+#from lsmfresh import lsm_policy, option_price_lsm
 
 S0_value = 36
 r_value = 0.06
