@@ -78,8 +78,10 @@ class OptimalExerciseBinTree:
             ex_points = [j for j in range(i + 1)
                          if policy_seq[i].action_for[j] and
                          self.payoff(i * dt, self.state_price(i, j)) > 0]
+            #print(ex_points)
             if len(ex_points) > 0:
                 boundary_pt = min(ex_points) if is_call else max(ex_points)
+                #print(max(ex_points))
                 ex_boundary.append(
                     (i * dt, self.state_price(i, boundary_pt))
                 )
